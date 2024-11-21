@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  patients_app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: "postgresql://username:password@db/patients_db"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: patients_db
+    ports:
+      - "5432:5432"
